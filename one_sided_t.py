@@ -63,7 +63,7 @@ def pearson_r(x, y):
   Compute Pearson correlation coefficient between two arrays
   '''
 
-  # Comput the correlation matrix: corr_mat
+  # Compute the correlation matrix: corr_mat
   corr_mat = np.corrcoef(x, y)
   return corr_mat[0, 1]
 
