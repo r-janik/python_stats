@@ -1,6 +1,15 @@
 from pandas import Series
 from statsmodels.tsa.stattools import adfuller
 
+def series_train_test_split(series : Series,split = 0.7) -> Series :
+    train_size = int(len(series)*split)
+    train,test = series[0:train_size], series[train_size:]
+    return train,test
+
+
+
+
+
 def unit_root_test(series : Series) -> bool:
     "Unit root stationarity test = Adfuller "
     result = adfuller(series.values)
