@@ -13,6 +13,17 @@ def moving_average_smoothing(series: Series, window_size: int) -> Series:
     return series.rolling(window=window_size).mean()
 
 
+def series_differentiation(series: Series, order: int) -> Series:
+    """
+    Timeseries differentiation.Usefull for detrend series
+    """
+    if order == 1:
+        return series.diff()
+    if order == 2:
+        return series.diff().diff()
+    else:
+        print("It doesn't have sense ")
+
 
 def baseline_predictions(train: list, test: list) -> list:
     '''
