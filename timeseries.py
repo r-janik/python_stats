@@ -1,4 +1,4 @@
-from pandas import Series,DataFrame
+from pandas import Series, DataFrame
 from statsmodels.tsa.stattools import adfuller
 
 
@@ -6,6 +6,12 @@ def series_train_test_split(series: Series, split=0.7) -> Series:
     train_size = int(len(series) * split)
     train, test = series[0:train_size], series[train_size:]
     return train, test
+
+
+def moving_average_smoothing(series: Series, window_size: int) -> Series:
+    """ Moving average smoothing for cleaning noisy signal """
+    return series.rolling(window=window_size).mean()
+
 
 
 def baseline_predictions(train: list, test: list) -> list:
