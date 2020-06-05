@@ -1,4 +1,4 @@
-from pandas import Series
+from pandas import Series,DataFrame
 from statsmodels.tsa.stattools import adfuller
 
 
@@ -38,3 +38,20 @@ def unit_root_test(series: Series) -> bool:
     else:
         print(f"Series is stationary, p_value = {p_value}")
         return True
+
+
+def get_outliers_iqr(df: DataFrame, iqr_mul=3) -> DataFrame:
+    """
+    Return upper and lower bound of outliers from pandas dataframe based on IQR indicator.
+    :param df: Pandas dataFrame
+    :param IQR_mul : IQR_mult > 1.5 - normal outliers and extreme outliers, IQR_mul > 3 - extreme outliers
+    :return lower_outliers, upper outlliers :
+    """
+    Q1 = df.quantile(0.25)
+    Q3 = df.quantile(0.75)
+    IQR = Q3 - Q1
+
+    lower_outliers = df < (Q1 - iqr_mul * IQR)
+    upper_outliers = df > (Q3 + iqr_mul * IQR)
+
+    return lower_outliers, upper_outliers
